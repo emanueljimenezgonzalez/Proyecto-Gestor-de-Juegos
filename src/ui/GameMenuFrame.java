@@ -50,7 +50,10 @@ public class GameMenuFrame extends JInternalFrame {
             state.setFont(new Font("SansSerif", Font.PLAIN, 11));
             JButton play = new JButton("Jugar  →");
             play.setForeground(Color.WHITE);
-            play.setBackground(PURPLE);
+            play.setBackground(new Color(25, 145, 70));
+            play.setOpaque(true);
+            play.setContentAreaFilled(true);
+            play.setBorderPainted(false);
             play.setFocusPainted(false);
             play.setBorder(new EmptyBorder(9, 12, 9, 12));
             play.addActionListener(event -> {

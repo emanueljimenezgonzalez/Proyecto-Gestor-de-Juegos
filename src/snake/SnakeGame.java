@@ -71,8 +71,16 @@ public class SnakeGame extends JInternalFrame implements GameFunction {
         add(boardPanel, BorderLayout.CENTER);
 
         JButton startButton = new JButton("Iniciar / Nueva partida");
+        startButton.setForeground(Color.WHITE);
+        startButton.setBackground(new Color(25, 145, 70));
+        startButton.setOpaque(true);
+        startButton.setContentAreaFilled(true);
+        startButton.setBorderPainted(false);
+        startButton.setFocusPainted(false);
+        startButton.setBorder(BorderFactory.createEmptyBorder(10, 18, 10, 18));
         startButton.addActionListener(event -> iniciar());
         JPanel bottomPanel = new JPanel();
+        bottomPanel.setBackground(new Color(12, 20, 14));
         bottomPanel.add(startButton);
         add(bottomPanel, BorderLayout.SOUTH);
 

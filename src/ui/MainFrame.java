@@ -160,7 +160,10 @@ public class MainFrame extends JFrame {
         JButton button = new JButton(text);
         button.setFont(new Font("SansSerif", Font.BOLD, 12));
         button.setForeground(Color.WHITE);
-        button.setBackground(primary ? PURPLE : new Color(27, 39, 30));
+        button.setBackground(primary ? new Color(25, 145, 70) : new Color(27, 39, 30));
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(false);
         button.setFocusPainted(false);
         button.setBorder(new EmptyBorder(11, 17, 11, 17));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
