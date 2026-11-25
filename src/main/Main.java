@@ -4,6 +4,8 @@ import core.GameManager;
 import snake.SnakeGame;
 import tetris.TetrisGame;
 import tresenraya.TicTacToeGame;
+import externo.ExternalGameAdapter;
+import reflejos.Reflejos;
 import ui.MainFrame;
 import ui.UiSupport;
 import core.Stat;
@@ -56,6 +58,24 @@ public class Main {
             gameManager.registrarJuego("Tres en raya", "Dos jugadores se turnan para alinear tres marcas.", () -> {
             TicTacToeGame juego = TicTacToeGame.getInstance();
             conectarResultado(juego, "tres_en_raya", controller, mainFrame); return juego;
+            });
+            // Juego externo: Reflejos (otro grupo). ExternalGameAdapter inicializa de
+            // forma segura y expone el JInternalFrame real (Reflejos) al escritorio.
+            gameManager.registrarJuego("Reflejos", "Juego de reflejos: reacciona a las señales buenas y evita las trampas.", () -> {
+                ExternalGameAdapter adapter = ExternalGameAdapter.getInstance();
+                if (!adapter.isDisponible()) {
+                    JOptionPane.showMessageDialog(mainFrame,
+                            "No se pudo cargar el juego externo 'Reflejos'.\n"
+                            + adapter.getErrorDeInicializacion(),
+                            "Error al cargar juego externo", JOptionPane.ERROR_MESSAGE);
+                    // GameManager no admite null; devolvemos TicTacToeGame como fallback
+                    // temporal para no lanzar IllegalStateException.
+                    throw new IllegalStateException("El juego externo no pudo inicializarse: "
+                            + adapter.getErrorDeInicializacion());
+                }
+                Reflejos juego = adapter.getJuego();
+                conectarResultado(juego, "externo", controller, mainFrame);
+                return juego;
             });
             // Listener único: una partida termina, se registra una vez y se intenta guardar.
 
