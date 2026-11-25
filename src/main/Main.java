@@ -3,6 +3,7 @@ package main;
 import core.GameManager;
 import snake.SnakeGame;
 import tetris.TetrisGame;
+import tresenraya.TicTacToeGame;
 import ui.MainFrame;
 import ui.UiSupport;
 import core.Stat;
@@ -41,6 +42,7 @@ public class Main {
             GameManager gameManager = new GameManager();
             gameManager.registrarJuego("Snake", "Come, crece y evita chocar contigo mismo.", SnakeGame::getInstance);
             gameManager.registrarJuego("Tetris", "Gira las piezas y completa líneas para sumar puntos.", TetrisGame::getInstance);
+            gameManager.registrarJuego("Tres en raya", "Dos jugadores se turnan para alinear tres marcas.", TicTacToeGame::getInstance);
 
             MainFrame mainFrame = new MainFrame(gameManager, controller);
             gameManager.registrarJuego("Snake", "Come, crece y evita chocar contigo mismo.", () -> {
@@ -50,6 +52,10 @@ public class Main {
             gameManager.registrarJuego("Tetris", "Gira las piezas y completa líneas para sumar puntos.", () -> {
                 TetrisGame juego = TetrisGame.getInstance();
                 conectarResultado(juego, "tetris", controller, mainFrame); return juego;
+            });
+            gameManager.registrarJuego("Tres en raya", "Dos jugadores se turnan para alinear tres marcas.", () -> {
+            TicTacToeGame juego = TicTacToeGame.getInstance();
+            conectarResultado(juego, "tres_en_raya", controller, mainFrame); return juego;
             });
             // Listener único: una partida termina, se registra una vez y se intenta guardar.
 
